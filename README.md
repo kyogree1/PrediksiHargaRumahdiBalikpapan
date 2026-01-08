@@ -1,6 +1,3 @@
----
-
-```md
 # House Price Prediction in Balikpapan 🏠📈
 
 A **Machine Learning–based web application** for predicting house prices in **Balikpapan City, Indonesia**, using property attributes such as land area, building area, number of rooms, and location (district).
@@ -35,17 +32,17 @@ The main model used is **Random Forest Regressor** with **log-transformed target
   - `building_to_land_ratio`
 
 ### Model Performance (Test Set)
+
 | Metric | Value |
 |------|------|
 | R² Score | **0.969** |
 | MAE | **IDR 117,555,135** |
 | RMSE | **IDR 209,826,935** |
 
-The model shows **high accuracy**, **low error**, and **minimal overfitting**.
-
 ---
 
 ## 📁 Project Structure
+
 
 ```
 
@@ -133,9 +130,17 @@ Main focus areas:
 
 ## 👤 Author
 
-**Muhammad Azka Yunastio**
-Informatics Engineering Student
-Institut Teknologi Kalimantan
+<details>
+<summary><strong>Click to view author details</strong></summary>
+
+<br>
+
+**Muhammad Azka Yunastio**  
+Informatics Engineering  
+Institut Teknologi Kalimantan  
+
+</details>
+
 
 ---
 
