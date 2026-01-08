@@ -1,61 +1,19 @@
-# ===============================
 # Python
-# ===============================
 __pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.so
-*.egg-info/
-.eggs/
-.env
-.venv
-venv/
-ENV/
+*.pyc
+
+# Virtual env
+.venv/
 env/
 
-# ===============================
-# Jupyter / Colab
-# ===============================
-.ipynb_checkpoints/
-*.ipynb
-
-# ===============================
-# Model & Artifact (besar)
-# ===============================
-model/*.pkl
-*.pkl
-*.joblib
-
-# ===============================
-# Dataset
-# ===============================
-data/*.csv
-*.csv
-
-# ===============================
-# Flask
-# ===============================
-instance/
-.flaskenv
-
-# ===============================
-# Logs
-# ===============================
-*.log
-
-# ===============================
-# OS / Editor
-# ===============================
+# OS & Editor
 .DS_Store
-Thumbs.db
 .vscode/
-.idea/
 
-# ===============================
-# Build / Cache
-# ===============================
-build/
-dist/
-.cache/
+# Jupyter cache (boleh)
+.ipynb_checkpoints/
 
+# Jangan ignore model & data
+# *.pkl
+# *.csv
+# model/
