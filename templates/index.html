@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediksi Harga Rumah Balikpapan</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #FFF9E5; /* kuning pastel */
+        }
+        .container {
+            width: 480px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border-top: 5px solid  #FFF9E5; /* biru navy */
+        }
+        h2 {
+            text-align: center;
+            color: #001F54;
+            margin-bottom: 25px;
+        }
+        label {
+            font-weight: bold;
+            color: #001F54;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+        input::placeholder {
+            color: #888;
+        }
+        button {
+            background-color: #001F54; /* biru navy */
+            color: #FFD966; /* kuning pastel */
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #004080;
+        }
+        .hasil {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #FFD96633; /* kuning pastel transparan */
+            border-left: 5px solid #001F54; /* biru navy */
+            border-radius: 8px;
+        }
+        .hasil p {
+            margin: 6px 0;
+        }
+        .hasil strong {
+            color: #001F54;
+        }
+        /* Tambahkan style untuk pesan error */
+        .error {
+            color: #B00020;
+            background-color: #FEEEEE;
+            border: 1px solid #B00020;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Prediksi Harga Rumah Balikpapan</h2>
+
+    {# Tampilkan Pesan Error #}
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form action="/predict" method="post">
+        <label>Kamar Tidur</label>
+        {# Tambahkan value untuk sticky form #}
+        <input type="number" name="kamar_tidur" placeholder="Masukkan jumlah kamar tidur" required
+               value="{{ kamar_tidur if kamar_tidur is not none }}">
+
+        <label>Kamar Mandi</label>
+        {# Tambahkan value untuk sticky form #}
+        <input type="number" name="kamar_mandi" placeholder="Masukkan jumlah kamar mandi" required
+               value="{{ kamar_mandi if kamar_mandi is not none }}">
+
+        <label>Luas Tanah (m²)</label>
+        {# Tambahkan value untuk sticky form #}
+        <input type="number" name="luas_tanah" placeholder="Masukkan luas tanah" required
+               value="{{ luas_tanah if luas_tanah is not none }}">
+
+        <label>Luas Bangunan (m²)</label>
+        {# Tambahkan value untuk sticky form #}
+        <input type="number" name="luas_bangunan" placeholder="Masukkan luas bangunan" required
+               value="{{ luas_bangunan if luas_bangunan is not none }}">
+
+        <label>Kecamatan</label>
+        <select name="kecamatan" required>
+            <option value="">Pilih Kecamatan</option>
+            
+            {# Ganti opsi hardcoded dengan loop dinamis #}
+            {% for item in kecamatan_list %}
+                <option value="{{ item }}" {% if item == kecamatan %}selected{% endif %}>{{ item }}</option>
+            {% endfor %}
+            
+            {# Tambahkan Balikpapan Barat (karena ada di select lama Anda) 
+               meskipun tidak ada di data training, agar UI tidak pecah. 
+               app.py akan mengabaikannya (dummy = 0) #}
+            {% if 'Balikpapan Barat' not in kecamatan_list %}
+                <option value="Balikpapan Barat" {% if 'Balikpapan Barat' == kecamatan %}selected{% endif %}>Balikpapan Barat</option>
+            {% endif %}
+
+        </select>
+
+        <button type="submit">Prediksi</button>
+    </form>
+
+    {% if range_harga %}
+    <div class="hasil">
+        <p><strong>Hasil Prediksi:</strong></p>
+        <p>Jumlah kamar tidur: <strong>{{ kamar_tidur }}</strong></p>
+        <p>Jumlah kamar mandi: <strong>{{ kamar_mandi }}</strong></p>
+        <p>Luas tanah: <strong>{{ luas_tanah }} m²</strong></p>
+        <p>Luas bangunan: <strong>{{ luas_bangunan }} m²</strong></p>
+        <p>Lokasi: <strong>{{ kecamatan }}</strong></p>
+        
+        {# Tampilkan prediksi tengah #}
+        <p>Prediksi Harga Tengah: <strong>{{ prediksi_tengah }}</strong></p>
+        
+        <p><strong>Rentang Estimasi Harga:</strong> {{ range_harga }}</p>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
